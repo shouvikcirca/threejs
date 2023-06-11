@@ -1,4 +1,26 @@
-import { BoxBufferGeometry, Mesh, MeshStandardMaterial, MathUtils} from "https://cdn.skypack.dev/three@0.132.2";
+import { 
+  BoxBufferGeometry, 
+  Mesh, 
+  MeshStandardMaterial, 
+  MathUtils,
+  TextureLoader
+} from "https://cdn.skypack.dev/three@0.132.2";
+
+
+function createMaterial() 
+{ 
+  const textureLoader = new TextureLoader();
+
+  const texture = textureLoader.load(
+    '/assets/textures/pexels-anni-roenkae-2832432.jpg',
+    );
+  // create a "standard" material
+  const material = new MeshStandardMaterial({ map: texture})// color: 'yellow' });
+  
+  return material;
+}
+
+
 
 function createCube() {
   // create a geometry
@@ -6,9 +28,8 @@ function createCube() {
 
 // Switch the old "basic" material to
 // a physically correct "standard" material
-  const material = new MeshStandardMaterial({color: 'purple'});
-
   // create a Mesh containing the geometry and material
+  const material = createMaterial();
   const cube = new Mesh(geometry, material);
   cube.rotation.set(-0.5, -0.1, 0.8);
 
